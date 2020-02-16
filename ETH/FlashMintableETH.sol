@@ -5,31 +5,23 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.3
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.3.0/contracts/math/SafeMath.sol";
 import "./IBorrower.sol";
 
-// @notice A simple token backed 1-to-1 with ETH. So market price should be 1 CT-ETH == 1 ETH.
+// @notice A simple token backed 1-to-1 with ETH. So market price should be 1 fmETH == 1 ETH.
 // Allows for instant "FlashMints" that are akin to flash loans:
 // User can mint any number of tokens into their account for a single transaction, so long as they
 // are then burned before the end of the transaction.
-// Given that the market price should be 1 CT-ETH == 1 ETH, this means anyone can be a quadrillionaire for an instant.
-contract CrazyTownERC20 is ERC20 {
+contract FlashMintableETH is ERC20 {
 
     using SafeMath for uint256;
 
-    ERC20 internal _underlying;
-
-    constructor(address underlying) public {
-        _underlying = ERC20(underlying);
+    // mints fmETH in 1-to-1 correspondence with ETH
+    function mint() public payable {
+        _mint(msg.sender, msg.value);
     }
 
-    // mints CT-Underlying in 1-to-1 correspondence with the underlying token
-    function mint(uint256 amount) public {
-        require(_underlying.transferFrom(msg.sender, address(this), amount), "transfer in failed");
-        _mint(msg.sender, amount);
-    }
-
-    // redeems CT-Underlying 1-to-1 for Underlying
+    // redeems fmETH 1-to-1 for ETH
     function redeem(uint256 amount) public {
-        _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough CT-Underlying
-        require(_underlying.transfer(msg.sender, amount), "transfer out failed");
+        _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough fmETH
+        msg.sender.transfer(amount);
     }
 
     // allows anyone to mint an arbitrary number of tokens into their account for a single transaction
@@ -43,6 +35,6 @@ contract CrazyTownERC20 is ERC20 {
         IBorrower(msg.sender).executeOnFlashMint(amount);
 
         // burn tokens
-        _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough CT-Underlying
+        _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough fmETH
     }
 }
