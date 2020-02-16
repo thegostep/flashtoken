@@ -2,7 +2,7 @@
 
 "Anyone can be arbitrarily rich, for an instant."
 Or
-"The biggest loans you could ever want. For free."
+"Borrow all the money in the world. For free."
 
 ## Warning
 
@@ -20,7 +20,7 @@ These are tokens that are 1-to-1 backed by some other underlying token. For exam
 
 Simple. No fees. Trustless. Easy. No "pre mine". Etc.
 
-In principle, CrazyTownETH should have a market value approximately equal to that of ETH, because they can be trustlessly redeemed, on demand, for ETH.
+In principle, CrazyTownETH should have a market value approximately equal to that of ETH, because they can be trustlessly redeemed, on demand, for ETH. This should be true no matter how many/few CrazyTown tokens exist.
 
 CrazyTownERC20 works exactly the same, just using your favorite ERC20 token as the underlying token instead of ETH.
 
@@ -36,7 +36,7 @@ If the hypothesis that "the market will value 1 CrazyTownETH at approximately 1 
 
 No matter what they then do with these tokens (e.g. buy, literally, everything on every DEX, use them as collateral to borrow everything from every lending platform, etc), as long as they are able to burn the correct amount of CrazyTown tokens afterwords, all the accounting on all the platforms should be fine. Nobody is every left holding a bag, because CrazyTown tokens are always 100% backed 1-to-1 before and after a flash loan.
 
-## The biggest loans you could ever want
+## All the money in the world
 
 You can flash mint as many tokens as you want, provided that the `_totalSupply` never exceeds `2^256-1`. So, for example, if you set DAI to be the underlying for your CrazyTownERC20 (CT-DAI), you could flash mint close to `$2^256 USD` worth of CT-DAI.
 
