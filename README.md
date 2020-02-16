@@ -57,15 +57,15 @@ First lets answer a slightly different question: Why would any business accept V
 
 The answer is that accepting Visa allows the companies to do more business. Customers without up-front capital can buy things on credit, and pay the business back later. Joe can buy beer at the pub before he gets his paycheck.
 
-Allowing customers to use credit increases sales. Accepting Visa allows results in more business.
+Allowing customers to use credit increases sales. Accepting Visa results in more business.
 
 Accepting FMTs is akin to accepting Visa, but even better because you can be _certain_ that the customer will fully pay off their entire debt before the end of the current transaction. You never have to worry about chargebacks or delinquent debt. You can accept FMTs with the same confidence that you wold accept wrapped ETH. At the end of any transaction, they will always be redeemable for exactly one unit of the underlying.
 
 So the idea is that Uniswap, Compound, Synthetix, etc would integrate FMTs because doing so is a trustless way to get more business. Users who don't have any up-front capital would be able to use those platforms and exploit market inefficiencies. All of this extra action results in those platforms taking fees.
 
-Currently, users without up-front capital need to crawl to a flash-lending pool first. They lose money to fees and they are limited in the amount of money they can borrow. These limitations mean some business that _could_ happen never _does_ happen.
+Currently, users without up-front capital need to crawl to a flash-lending pool first. They lose money to fees and they are limited in the amount of money they can borrow. These limitations mean some business that _could_ happen never _does_ happen. By _not_ accepting FMTs, these platforms would be leaving money on the table.
 
 By accepting FMTs, these platforms cut out the lending-pool middlemen and get direct, efficient access to the users who have no up-front capital.
 
-And FMTs are just ERC20 tokens. There is no custom code that needs to be written to accept them. If your platform can accept wrapped ETH, then it can use the exact same code to accept fmETH.
+And FMTs are just ERC20 tokens. There is no custom code that needs to be written to safely accept them. If your platform can accept wrapped ETH, then it can use the exact same code to accept fmETH.
 
