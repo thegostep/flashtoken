@@ -41,7 +41,7 @@ If the market price of an FMT rises above the market price of its underlying tok
 
 There is a second way that you can mint flash-mintable tokens: Flash Minting, and this is where FMTs get all their power.
 
-Anyone can call the `flashMint` function and mint into their account any number of FTMs, provided that those FMTs are burned before the end of the transaction.
+Anyone can call the `flashMint` function and mint into their account any number of FMTs, provided that those FMTs are burned before the end of the transaction.
 
 Since the same number of tokens that are flash-minted must also be burned by the end of the transaction, the 1-to-1 backing is always restored by the end of the transaction. As a result, anyone who holds an FMT can be certain that -- by the end of any transaction -- the FMTs will be 1-to-1 redeemable for the underlying.
 
