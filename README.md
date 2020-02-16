@@ -45,9 +45,11 @@ Anyone can call the `flashMint` function and mint into their account any number 
 
 Since the same number of tokens that are flash-minted must also be burned by the end of the transaction, the 1-to-1 backing is always restored by the end of the transaction. As a result, anyone who holds an FMT can be certain that -- by the end of any transaction -- the FMTs will be 1-to-1 redeemable for the underlying.
 
-So it is _always_ safe to accept an FMT, even during a flash mint transaction when there are potentially quadrillions more of them than there are underlying tokens backing them. You can be sure that any FMT you are holding will be redeemable for exactly one of its underlying tokens.
+So it is _always_ safe to accept an FMT, even during a flash mint transaction when there are potentially quadrillions more of them than there are underlying tokens backing them. You can be sure that any FMT you are holding will be redeemable for exactly one of its underlying tokens before and after any external transaction.
 
-If the flash-minter fails to burn the same number of tokens they minted before the end of the transaction, the transaction reverts.
+Nobody is ever at risk of being "left holding a bag". The 1-to-1 backing is fully restored by the end of any flash mint.
+
+If the flash-minter fails to burn the same number of tokens they minted before the end of the transaction, the transaction reverts (again, fully restoring the 1-to-1 backing).
 
 ## Why would anybody accept FMTs?
 
