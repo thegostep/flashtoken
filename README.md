@@ -1,53 +1,64 @@
-# crazytown-flash-tokens
+# flash-mintable-tokens
 
 "Anyone can be arbitrarily rich, for an instant."
-Or
-"Borrow all the money in the world. For free."
+
 
 ## Warning
 
-This is a new and completely untested idea. In principle it can let anyone mint and destroy quadrillions of quadrillions of dollars value in an instant. Be careful.
+This is a new and untested idea. The contracts are simple but have not been audited. Be careful before 
 
 These contracts are simple, but have not been audited. Please don't use them with any amount of money that you don't feel like losing. More importantly, please don't plug these tokens into your platform (e.g. Uniswap, Compound, Maker CDP, etc) unless you've thought much longer and harder about the ramifications than I have.
 
 This is just a fun experiment. Please don't lose any of your hard-earned money.
 
-## What is this?
+## What are flash-mintable tokens?
 
-### The basic boring part
+Flash-mintable tokens (FMTs) are a new and more powerful form of flash lending. With traditional flash loans, an arbitrageur who needs $250M in DAI to exploit an inefficiency needs to go find some lending platform that has $250M in DAI and is willing to flash lend it.
 
-These are tokens that are 1-to-1 backed by some other underlying token. For example, 1 CrazyTownETH (CT-ETH) can be minted by sending the contract 1 ETH. And 1 CT-ETH can be redeemed for 1 ETH by sending it back to the contract.
+With FMTs, the arbitrageur no longer needs to crawl to some lending platform for money. Instead, they can literally mint the money into existence -- on their own, with no counterparty needed. They can use their newly minted money to exploit market inefficiencies, and then -- in the same transaction in which they created the money -- they destroy it.
 
-Simple. No fees. Trustless. Easy. No "pre mine". Etc.
+Anyone who accepts an FMT (such as a DEX or lending platform) can be 100% certain that - by the end of the transaction in which they received it -- the FMT will maintain full market value.
 
-In principle, CrazyTownETH should have a market value approximately equal to that of ETH, because they can be trustlessly redeemed, on demand, for ETH. This should be true no matter how many/few CrazyTown tokens exist.
+Literally trillions of dollars in value can be minted into existence, used for arbitrage, and then destroyed in the same transaction. And everyone holding the FMT can be certain that it maintains its market value.
 
-CrazyTownERC20 works exactly the same, just using your favorite ERC20 token as the underlying token instead of ETH.
+### How do FMTs maintain their value?
 
-### The interesting part
+At the beginning and end of any external transaction, all flash-mintable tokens (FMTs) are guaranteed to be 1-to-1 backed by some other underlying token.
 
-There is a second way that you can mint CrazyTown tokens: Flash Minting. 😎
+For example, flash-mintable ETH (fmETH) is backed 1-to-1 by ETH. The most basic way to mint a new fmETH token is to send 1 ETH to the fmETH contract. This mints one fmETH into existence and puts it in your account.
 
-Anyone can call the `flashMint` function and mint into their account any number of CrazyTown tokens, provided that those tokens are burned before the end of the transaction.
+At any time, you can redeem your fmETH token for 1 ETH. Just send the fmETH token back to the contract. It will burn the fmETH token and send you 1 ETH.
 
-If the hypothesis that "the market will value 1 CrazyTownETH at approximately 1 ETH" holds, then Flash Minting allows anyone to mint an _arbitrary amount of money_ into existence for one "atomic" moment of time.
+Simple. No fees. Trustless. Easy. No "pre mine". Truly fair. Etc.
 
-(In fact, if the market gives them _any value_ greater than `$0` then you can effectively mint an arbitrary amount of value into existence).
+Similarly, flash-mintable DAI (fmDAI), flash-mintable REP (fmREP), and flash-mintable MKR (fmMKR) are each guaranteed to be backed 1-to-1 by DAI, REP, and MKR (respectively) at the beginning and end of every external transaction.
 
-No matter what they then do with these tokens (e.g. buy, literally, everything on every DEX, use them as collateral to borrow everything from every lending platform, etc), as long as they are able to burn the correct amount of CrazyTown tokens afterwords, all the accounting on all the platforms should be fine. Nobody is every left holding a bag, because CrazyTown tokens are always 100% backed 1-to-1 before and after a flash loan.
+As a result, FMTs should always maintain a market value approximately equal to their underlying tokens. If the price of an FMT dropped below the market price of its underlying token, then arbitrageurs would simply buy the FMT and redeem it for the underlying.
 
-## All the money in the world
+### How does flash minting work?
 
-You can flash mint as many tokens as you want, provided that the `_totalSupply` never exceeds `2^256-1`. So, for example, if you set DAI to be the underlying for your CrazyTownERC20 (CT-DAI), you could flash mint close to `$2^256 USD` worth of CT-DAI.
+There is a second way that you can mint flash-mintable tokens: Flash Minting.
 
-If even _one_ major platform listed the CT-DAI token, and it fetched nearly _any_ market price greater `$0`, then you could flash mint enough CT-DAI to leverage the entire power of the entire listing platform towards whatever end you wanted.
+Anyone can call the `flashMint` function and mint into their account any number of FTMs, provided that those FMTs are burned before the end of the transaction.
 
-Either all of the accounting across all of the platforms you touched during your Flash Mint will balance out correctly, or else your transaction will revert.
+Since the number of tokens flash-minted must also be burned by the end of the transaction, anyone who holds an FMT can always be certain that -- at the beginning and end of any external transaction -- the FMTs will be redeemable for the underlying.
 
-## A second warning
+So it it _always_ safe to accept an FMT, even during a flash mint transaction when there are potentially quadrillions more of them than there are underlying tokens backing them. You can be sure that -- if you are still holding an FMT by the end of the current transaction -- it will be redeemable for exactly one of its underlying tokens.
 
-Seriously, be careful. This is a new an untested idea and this is unaudited code. Just don't.
+If the flash-minter fails to burn the same number of tokens they minted before the end of the transaction, the transaction reverts.
 
-For example, I cannot even _imagine_ the tax ramifications of minting and burning `$2^255 USD worth` of CrazyTown tokens.
+## Unlimited liquidity. From nothing.
 
-But have fun and remember: we're all just silly monkeys, and money is just make-believe.
+One incredible property of FMTs is that even if there are no FMTs in existence at the beginning of a transaction, you can still mint an arbitrary number of them into existence, and during your flash loan, people can still safely accept them at face value.
+
+For example: If no fmETH currently exist (that is, if the fmETH contract does not currently hold any ETH as collateral) you can _still_ flash mint an arbitrary amount fmETH and everyone can _still_ safely accept it. And the people who accept it can be _certain_ that they will be able to redeem that fmETH for 1 ETH if they are still holding at the end of the transaction.
+
+This is powerful.
+
+Imagine a flash lending pool with a _literally unlimited_ amount of liquidity available to be borrowed by flash borrowers. And then imagine that the pool did not require anyone to invest their money on the lending side. There are no lenders to pay fees to. There is no need for yield. We are removing lenders from the picture.
+
+Atomic transactions enable traditional flash loans to work because they guarantee the lender that the borrower will repay the loan. The trust comes from the atomicity.
+
+For FMTs, the trust also comes from the atomicity. A holder of an FMT understands that the 1-to-1 peg may become wildly broken during a given transaction, but knows _for sure_ that the 1-to-1 peg will be fully restored by the end of the transaction. If you are holding an FMT, you _will_ be able to redeem it for one of the underlying token at the beginning or end of any external transaction.
+
+FMTs can be thought of as leveraging atomicity to provide a form of _perfect credit_.
