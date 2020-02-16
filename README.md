@@ -1,5 +1,8 @@
 # crazytown-flash-tokens
-Anyone can be arbitrarily rich... for an instant.
+
+"Anyone can be arbitrarily rich, for an instant."
+Or
+"The biggest loans you could ever want. For free."
 
 ## Warning
 
@@ -33,7 +36,7 @@ If the hypothesis that "the market will value 1 CrazyTownETH at approximately 1 
 
 No matter what they then do with these tokens (e.g. buy, literally, everything on every DEX, use them as collateral to borrow everything from every lending platform, etc), as long as they are able to burn the correct amount of CrazyTown tokens afterwords, all the accounting on all the platforms should be fine. Nobody is every left holding a bag, because CrazyTown tokens are always 100% backed 1-to-1 before and after a flash loan.
 
-## All the liquidity you could ever want
+## The biggest loans you could ever want
 
 You can flash mint as many tokens as you want, provided that the `_totalSupply` never exceeds `2^256-1`. So, for example, if you set DAI to be the underlying for your CrazyTownERC20 (CT-DAI), you could flash mint close to `$2^256 USD` worth of CT-DAI.
 
