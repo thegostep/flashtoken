@@ -43,6 +43,6 @@ contract CrazyTownERC20 is ERC20 {
         IBorrower(msg.sender).executeOnFlashMint(amount);
 
         // burn tokens
-        _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough CT-ETH
+        _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough CT-Underlying
     }
 }
