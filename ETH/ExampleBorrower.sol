@@ -8,10 +8,15 @@ contract Borrower is Ownable {
 
     FlashMintableETH fmETH = FlashMintableETH(address(0x0)); // address of FlashMintableETH contract
 
+    // required to receive ETH in case you want to `redeem` some fmETH for real ETH during `executeOnFlashMint`
+    function () external payable {}
+
+    // call this function to fire off your flash mint
     function beginFlashMint(uint256 amount) public onlyOwner {
         fmETH.flashMint(amount);
     }
 
+    // this is what executes during your flash mint
     function executeOnFlashMint(uint256 amount) public {
         require(msg.sender == address(fmETH), "only FlashMintableETH can execute");
 
