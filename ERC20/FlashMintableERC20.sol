@@ -44,5 +44,8 @@ contract FlashMintableERC20 is ERC20 {
 
         // burn tokens
         _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough units of the FMT
+
+        // sanity check (not strictly needed)
+        require(_underlying.balanceOf(address(this)) >= totalSupply(), "redeemability was broken");
     }
 }
