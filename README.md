@@ -1,6 +1,6 @@
 # flash-mintable-tokens
 
-Perfect credit with no credit limit.
+"Anyone can be rich for an instant." or "Perfect credit from atomicity."
 
 ## Warning
 
