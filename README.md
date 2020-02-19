@@ -12,10 +12,13 @@ This is a new and untested idea. The contracts are simple but have not been audi
 
 ## Deployment Addresses
 
-`FlashDAI`: [0xC0401005B1A1cfE46e0346a28203153098edFeF5](https://etherscan.io/address/0xC0401005B1A1cfE46e0346a28203153098edFeF5)
-`FlashNMR`: [0x339C47BE91D6F26975Ee0A3b104Ecd5eD54E2323](https://etherscan.io/address/0x339C47BE91D6F26975Ee0A3b104Ecd5eD54E2323)
+| Tokens | Mainnet |
+|-|-|
+| `FlashDAI` | [0xC0401005B1A1cfE46e0346a28203153098edFeF5](https://etherscan.io/address/0xC0401005B1A1cfE46e0346a28203153098edFeF5) |
+| `FlashNMR` | [0x339C47BE91D6F26975Ee0A3b104Ecd5eD54E2323](https://etherscan.io/address/0x339C47BE91D6F26975Ee0A3b104Ecd5eD54E2323) |
 
 | Contract | Mainnet | Goerli | Kovan |
+|-|-|-|-|
 | `FlashTokenTemplate` | [0x9EbDd0f7ae32C92161237560B1cd2Bc4b6741ec6](https://etherscan.io/address/0x9EbDd0f7ae32C92161237560B1cd2Bc4b6741ec6) | [0xf89bA048e85bc5B9b25aBdDbdC6d8eF2806329f3](https://goerli.etherscan.io/address/0xf89bA048e85bc5B9b25aBdDbdC6d8eF2806329f3) | [0x91699274E86AFFa58Fb8ba525B980fFC8D161FbC](https://kovan.etherscan.io/address/0x91699274E86AFFa58Fb8ba525B980fFC8D161FbC) |
 | `FlashTokenFactory` | [0x80dDB6404e022fe98961d6CCaf401077DB920824](https://etherscan.io/address/0x80dDB6404e022fe98961d6CCaf401077DB920824) | [0x2f4755bffEBD85625ac85571c56dDA578465e65d](https://goerli.etherscan.io/address/0x2f4755bffebd85625ac85571c56dda578465e65d) | [0x022a36A213aac89D954cF872F2f2FDD4360A7721](https://kovan.etherscan.io/address/0x022a36A213aac89D954cF872F2f2FDD4360A7721)|
 
