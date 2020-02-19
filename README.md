@@ -2,9 +2,22 @@
 
 "Anyone can be rich for an instant." or "Perfect credit from atomicity."
 
+## Create Flash Token
+
+To wrap any ERC20 token as a flash token, call `createFlashWrap(address token)` on the `FlashTokenFactory`. The factory is inspired by the clone factories of the [Erasure Protocol](https://github.com/erasureprotocol/erasure-protocol).
+
 ## Warning
 
-This is a new and untested idea. The contracts are simple but have not been audited. Be careful.
+This is a new and untested idea. The contracts are simple but have not been audited. Play at your own risk.
+
+## Deployment Addresses
+
+`FlashDAI`: [0xC0401005B1A1cfE46e0346a28203153098edFeF5](https://etherscan.io/address/0xC0401005B1A1cfE46e0346a28203153098edFeF5)
+`FlashNMR`: [0x339C47BE91D6F26975Ee0A3b104Ecd5eD54E2323](https://etherscan.io/address/0x339C47BE91D6F26975Ee0A3b104Ecd5eD54E2323)
+
+| Contract | Mainnet | Goerli | Kovan |
+| `FlashTokenTemplate` | [0x9EbDd0f7ae32C92161237560B1cd2Bc4b6741ec6](https://etherscan.io/address/0x9EbDd0f7ae32C92161237560B1cd2Bc4b6741ec6) | [0xf89bA048e85bc5B9b25aBdDbdC6d8eF2806329f3](https://goerli.etherscan.io/address/0xf89bA048e85bc5B9b25aBdDbdC6d8eF2806329f3) | [0x91699274E86AFFa58Fb8ba525B980fFC8D161FbC](https://kovan.etherscan.io/address/0x91699274E86AFFa58Fb8ba525B980fFC8D161FbC) |
+| `FlashTokenFactory` | [0x80dDB6404e022fe98961d6CCaf401077DB920824](https://etherscan.io/address/0x80dDB6404e022fe98961d6CCaf401077DB920824) | [0x2f4755bffEBD85625ac85571c56dDA578465e65d](https://goerli.etherscan.io/address/0x2f4755bffebd85625ac85571c56dda578465e65d) | [0x022a36A213aac89D954cF872F2f2FDD4360A7721](https://kovan.etherscan.io/address/0x022a36A213aac89D954cF872F2f2FDD4360A7721)|
 
 ## Flash-mintable tokens vs flash loans
 
@@ -35,7 +48,6 @@ As a result, FMTs should always maintain a market value approximately equal to t
 If the market price of an FMT drops below the market price of its underlying token, then arbitrageurs will simply buy the FMT on the open market and redeem it for the underlying.
 
 If the market price of an FMT rises above the market price of its underlying token, arbitrageurs will simply mint more of the FMT (by sending the underlying to the FMT contract) and sell it on the open market for a profit.
-
 
 ### How does flash minting work?
 
@@ -68,7 +80,6 @@ So the idea is that Uniswap, Compound, Synthetix, etc would integrate FMTs becau
 Currently, users without up-front capital need to crawl to a flash-lending pool first. They lose money to fees and they are limited in the amount of money they can borrow. These limitations mean some business that _could_ happen never _does_ happen. By _not_ accepting FMTs, these platforms would be leaving money on the table.
 
 By accepting FMTs, these platforms cut out the lending-pool middlemen and get direct, efficient access to the users who have no up-front capital. The reap more platform fees as a benefit.
-
 
 ## Platform integration
 
