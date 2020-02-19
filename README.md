@@ -4,7 +4,7 @@
 
 ## Create Flash Token
 
-To wrap any ERC20 token as a flash token, call `createFlashWrap(address token)` on the `FlashTokenFactory`. The factory is inspired by the clone factories of the [Erasure Protocol](https://github.com/erasureprotocol/erasure-protocol).
+To wrap any ERC20 token as a flash token, call `createFlashToken(address token)` on the `FlashTokenFactory`. The factory is inspired by the clone factories of the [Erasure Protocol](https://github.com/erasureprotocol/erasure-protocol).
 
 ## Warning
 
