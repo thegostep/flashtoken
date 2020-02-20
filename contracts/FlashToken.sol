@@ -1,11 +1,9 @@
 pragma solidity 0.5.16;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.3.0/contracts/token/ERC20/ERC20.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.3.0/contracts/token/ERC20/ERC20Detailed.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.3.0/contracts/math/SafeMath.sol";
-
-interface IBorrower {
-    function executeOnFlashMint(uint256 amount) external;
-}
+import "./IBorrower.sol";
 
 /// @title FlashToken
 /// @author Stephane Gosselin (@thegostep), Austin Williams (@Austin-Williams)
@@ -13,8 +11,11 @@ interface IBorrower {
 contract FlashToken is ERC20 {
     using SafeMath for uint256;
 
-    ERC20 internal _baseToken;
+    ERC20Detailed internal _baseToken;
     address private _factory;
+    string public name;
+    string public symbol;
+    uint8 public decimals;
 
     /////////////////////////////
     // Template Initialization //
@@ -36,7 +37,10 @@ contract FlashToken is ERC20 {
 
     /// @notice Initialize the instance with the base token
     function initialize(address baseToken) public initializeTemplate() {
-        _baseToken = ERC20(baseToken);
+        _baseToken = ERC20Detailed(baseToken);
+        name = string(abi.encodePacked("Flash", _baseToken.name()));
+        symbol = string(abi.encodePacked("Flash", _baseToken.symbol()));
+        decimals = _baseToken.decimals();
     }
 
     /// @notice Get the address of the factory for this clone.
@@ -49,6 +53,25 @@ contract FlashToken is ERC20 {
     /// @return factory address of the base token.
     function getBaseToken() public view returns (address baseToken) {
         return address(_baseToken);
+    }
+
+    //////////////
+    // wrapping //
+    //////////////
+
+    /// @notice Deposit baseToken
+    function deposit(uint256 amount) public {
+        require(
+            _baseToken.transferFrom(msg.sender, address(this), amount),
+            "transfer in failed"
+        );
+        _mint(msg.sender, amount);
+    }
+
+    /// @notice Withdraw baseToken
+    function withdraw(uint256 amount) public {
+        _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough CT-baseToken
+        require(_baseToken.transfer(msg.sender, amount), "transfer out failed");
     }
 
     //////////////
@@ -73,21 +96,6 @@ contract FlashToken is ERC20 {
             _baseToken.balanceOf(address(this)) >= totalSupply(),
             "redeemability was broken"
         );
-    }
-
-    /// @notice Deposit baseToken
-    function deposit(uint256 amount) public {
-        require(
-            _baseToken.transferFrom(msg.sender, address(this), amount),
-            "transfer in failed"
-        );
-        _mint(msg.sender, amount);
-    }
-
-    /// @notice Withdraw baseToken
-    function withdraw(uint256 amount) public {
-        _burn(msg.sender, amount); // reverts if `msg.sender` does not have enough CT-baseToken
-        require(_baseToken.transfer(msg.sender, amount), "transfer out failed");
     }
 
     /// @notice Executes flash mint and calls strandard interface for transaction execution

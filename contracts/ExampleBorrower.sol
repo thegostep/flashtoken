@@ -1,11 +1,15 @@
 pragma solidity 0.5.16;
 
 import "./FlashToken.sol";
+import "./IBorrower.sol";
 
-contract Borrower {
+contract Borrower is IBorrower {
     FlashToken flashToken = FlashToken(address(0x0)); // address of FlashToken contract
 
-    function executeOnFlashMint(uint256 amount) public {
+    // required to receive ETH in case you want to `redeem` some fmETH for real ETH during `executeOnFlashMint`
+    function() external payable {}
+
+    function executeOnFlashMint(uint256 amount) external {
         require(
             msg.sender == address(flashToken),
             "only FlashToken can execute"

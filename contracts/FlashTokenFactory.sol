@@ -21,7 +21,8 @@ contract FlashTokenFactory is Spawner {
     );
 
     /// @notice Initialize factory with template contract.
-    constructor(address templateContract) public {
+    function setTemplate(address templateContract) public {
+        require(_templateContract == address(0));
         _templateContract = templateContract;
         emit TemplateSet(templateContract);
     }
