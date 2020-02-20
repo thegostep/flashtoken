@@ -3,6 +3,26 @@ pragma solidity 0.5.16;
 import "./FlashToken.sol";
 import "https://github.com/erasureprotocol/erasure-protocol/blob/v1.2.0/contracts/modules/Spawner.sol";
 
+contract UniswapFactoryInterface {
+    // Public Variables
+    address public exchangeTemplate;
+    uint256 public tokenCount;
+    // Create Exchange
+    function createExchange(address token) external returns (address exchange);
+    // Get Exchange and Token Info
+    function getExchange(address token)
+        external
+        view
+        returns (address exchange);
+    function getToken(address exchange) external view returns (address token);
+    function getTokenWithId(uint256 tokenId)
+        external
+        view
+        returns (address token);
+    // Never use
+    function initializeFactory(address template) external;
+}
+
 /// @title FlashTokenFactory
 /// @author Stephane Gosselin (@thegostep)
 /// @notice An Erasure style factory for Wrapping FlashTokens
@@ -17,6 +37,7 @@ contract FlashTokenFactory is Spawner {
     event FlashTokenCreated(
         address indexed token,
         address indexed flashToken,
+        address indexed uniswapExchange,
         uint256 tokenID
     );
 
@@ -39,13 +60,22 @@ contract FlashTokenFactory is Spawner {
             require(_baseToFlash[token] == address(0), "token already wrapped");
 
             flashToken = _flashWrap(token);
+            address uniswapExchange = UniswapFactoryInterface(
+                0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95
+            )
+                .createExchange(flashToken);
 
             _baseToFlash[token] = flashToken;
             _flashToBase[flashToken] = token;
             _tokenCount += 1;
             _idToBase[_tokenCount] = token;
 
-            emit FlashTokenCreated(token, flashToken, _tokenCount);
+            emit FlashTokenCreated(
+                token,
+                flashToken,
+                uniswapExchange,
+                _tokenCount
+            );
             return flashToken;
         }
     }
