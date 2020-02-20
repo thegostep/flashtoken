@@ -4,9 +4,9 @@
 
 ## Create Flash Token
 
-`FlashNMR`: [0xc909b390bf33422d1ea2e23086d08b54b6047128](https://etherscan.io/address/0xc909b390bf33422d1ea2e23086d08b54b6047128)
-`FlashDAI`: [0x1b7d409afc87b330aa52ca87892cddab50e47cf7](https://etherscan.io/address/0x1b7d409afc87b330aa52ca87892cddab50e47cf7)
-`FlashTokenFactory`: [0x0123A7dAE08Fb4D3E88A34511a3e230edA83c941](https://etherscan.io/address/0x0123A7dAE08Fb4D3E88A34511a3e230edA83c941)
+`FlashNMR`: [0xc909b390bf33422d1ea2e23086d08b54b6047128](https://etherscan.io/address/0xc909b390bf33422d1ea2e23086d08b54b6047128)  
+`FlashDAI`: [0x1b7d409afc87b330aa52ca87892cddab50e47cf7](https://etherscan.io/address/0x1b7d409afc87b330aa52ca87892cddab50e47cf7)  
+`FlashTokenFactory`: [0x0123A7dAE08Fb4D3E88A34511a3e230edA83c941](https://etherscan.io/address/0x0123A7dAE08Fb4D3E88A34511a3e230edA83c941)  
 
 To wrap any ERC20 token as a flash token, call `createFlashToken(address token)` on the `FlashTokenFactory`. The factory is inspired by the clone factories of the [Erasure Protocol](https://github.com/erasureprotocol/erasure-protocol).
 
